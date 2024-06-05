@@ -1,35 +1,27 @@
-name: CI/CD Pipeline
+name: Deploy react-app 
+
+
 
 on:
   push:
     branches:
-      - main
+      - main  # Replace with your branch name
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build
-      run: npm run build
-
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
+    runs-on: self-hosted  
+    
     steps:
-    - name: Deploy to hosting service
-      # Add your deployment step here, for example, deploying to Netlify or Vercel
-      # Example:
-      # run: npm run deploy
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Build and Deploy
+        run: |
+          npm install
+          npm run build
+          
+          sudo cp -r ./build/* /var/www/html
+
+      - name: Restart Nginx
+        run: |
+          sudo systemctl restart nginx
