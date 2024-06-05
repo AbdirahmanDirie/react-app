@@ -15,12 +15,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Build and Deploy
-        run: |
-          npm install
-          npm run build
-          
-          cp -r ./build/* /var/www/html
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run the tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
 
       - name: Restart Nginx
         run: |
