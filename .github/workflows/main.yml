@@ -21,6 +21,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Restart Nginx
-        run: |
-          sudo systemctl restart nginx
+      # - name: Restart Nginx
+      #   run: |
+      #     sudo systemctl restart nginx
