@@ -20,7 +20,7 @@ jobs:
           npm install
           npm run build
           
-          sudo cp -r ./build/* /var/www/html
+           echo "dirie" | sudo -S cp -r ./build/* /var/www/html
 
       - name: Restart Nginx
         run: |
